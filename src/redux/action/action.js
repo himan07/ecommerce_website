@@ -3,6 +3,7 @@ import {
   SELECTED_PRODUCTS,
   REMOVE_SELECTED_PRODUCTS,
 } from "../constant";
+
 export const setProducts = (products) => {
   return {
     type: SET_PRODUCTS,
@@ -10,16 +11,15 @@ export const setProducts = (products) => {
   };
 };
 
-export const selectedProducts = (selectedProducts) => {
+export const selectedProduct = (selectedProducts) => {
   return {
     type: SELECTED_PRODUCTS,
     payload: selectedProducts,
   };
 };
 
-export const removeProducts = (removePrdouct) => {
+export const removeProducts = () => {
   return {
     type: REMOVE_SELECTED_PRODUCTS,
-    payload: removePrdouct,
   };
 };
