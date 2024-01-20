@@ -56,12 +56,14 @@ const ProductDetail = () => {
                 <div
                   className="ui vertical animated button"
                   tabIndex="0"
-                  style={{ backgroundColor: "#000000"}}
+                  style={{ backgroundColor: "#000000" }}
                 >
                   <div className="hidden content">
-                    <i className="shop icon" style={{color:"#ddd"}}></i>
+                    <i className="shop icon" style={{ color: "#ddd" }}></i>
                   </div>
-                  <div className="visible content" style={{color:"#ddd"}}>Add to Cart</div>
+                  <div className="visible content" style={{ color: "#ddd" }}>
+                    Add to Cart
+                  </div>
                 </div>
               </div>
             </div>
