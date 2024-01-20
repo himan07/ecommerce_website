@@ -11,7 +11,7 @@ const ProductListing = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("https://fakestoreapi.com/products");
+      const response = await axios.get("https://api.escuelajs.co/api/v1/products");
       console.log(response);
       dispatch(setProducts(response.data));
     } catch (error) {

@@ -1,17 +1,20 @@
 import * as React from "react";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-
-import { Card, CardActions, CardContent, CardMedia } from "@mui/material";
+import { Card, CardContent, CardMedia } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const ProductComp = () => {
   const Products = useSelector((state) => state.allProducts.products);
   const renderList = Products.map((product) => {
-    const { id, title, price, image, category } = product;
+    const { id, price, title, images, name } = product;
+
+    console.log("images", images);
+
+    const handleClick = (event) => {
+      event.preventDefault();
+    };
+
     return (
       <>
         <div
@@ -22,11 +25,14 @@ const ProductComp = () => {
           }}
         >
           <Link to={`/product/${id}`}>
-            <Card sx={{ maxWidth: 345 }} style={{ padding: "20px" }}>
+            <Card
+              sx={{ maxWidth: 345, maxHeight: 400 }}
+              style={{ padding: "20px 20px 30px 20px", height: 340 }}
+            >
               <CardMedia
                 component="img"
                 height="194"
-                image={image}
+                src={images}
                 alt={title}
               />
               <CardContent>
@@ -37,17 +43,27 @@ const ProductComp = () => {
                   ${price}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {category}
+                  {name}
                 </Typography>
+                <div
+                  className="ui vertical animated button"
+                  tabIndex="0"
+                  style={{
+                    backgroundColor: "#000000",
+                    height: "20px !importants",
+                    margin: "20px 10px",
+                    width: "150px",
+                  }}
+                  onClick={(event) => handleClick(event)}
+                >
+                  <div className="hidden content">
+                    <i className="shop icon" style={{ color: "#ddd" }}></i>
+                  </div>
+                  <div className="visible content" style={{ color: "#ddd" }}>
+                    Add to Cart
+                  </div>
+                </div>
               </CardContent>
-              <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                  <FavoriteIcon />
-                </IconButton>
-                <IconButton aria-label="share">
-                  <ShareIcon />
-                </IconButton>
-              </CardActions>
             </Card>
           </Link>
         </div>

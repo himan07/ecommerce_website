@@ -8,16 +8,15 @@ const ProductDetail = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
 
-  console.log(productId);
+  // console.log(productId);
 
   const selectedProductData = useSelector((state) => state.product);
-  const { id, title, price, image, category, description } =
-    selectedProductData;
+  const { price, title, description, images } = selectedProductData;
 
   const fetchProductDetails = async () => {
     try {
       const response = await axios.get(
-        `https://fakestoreapi.com/products/${productId}`
+        `https://api.escuelajs.co/api/v1/products/${productId}`
       );
       dispatch(selectedProduct(response.data));
     } catch (error) {
@@ -44,7 +43,7 @@ const ProductDetail = () => {
               <div className="column 1p">
                 <img
                   className="ui fluid images"
-                  src={image}
+                  src={images}
                   style={{ height: "500px", width: "500px" }}
                 />
               </div>
@@ -53,13 +52,16 @@ const ProductDetail = () => {
                 <h2>
                   <a className="ui teal tag label">${price}</a>
                 </h2>
-                <h3 className="ui brown black header">{category}</h3>
-                <p>{description}</p>
-                <div className="ui vertical animated button" tabIndex="0">
+                <h3 className="ui brown black header">{description}</h3>
+                <div
+                  className="ui vertical animated button"
+                  tabIndex="0"
+                  style={{ backgroundColor: "#000000"}}
+                >
                   <div className="hidden content">
-                    <i className="shop icon"></i>
+                    <i className="shop icon" style={{color:"#ddd"}}></i>
                   </div>
-                  <div className="visible content">Add to Cart</div>
+                  <div className="visible content" style={{color:"#ddd"}}>Add to Cart</div>
                 </div>
               </div>
             </div>
