@@ -9,8 +9,11 @@ const ProductComp = () => {
   const renderList = Products.map((product) => {
     const { id, price, title, images, name } = product;
 
+<<<<<<< HEAD
     console.log("images", images);
 
+=======
+>>>>>>> bd8d7c205ae7cb91f2be8faeeb8a9eead6a9e29f
     const handleClick = (event) => {
       event.preventDefault();
     };
