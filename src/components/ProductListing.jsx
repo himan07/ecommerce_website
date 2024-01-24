@@ -1,21 +1,13 @@
 import React, { useEffect } from "react";
 import ProductComp from "./ProductComp";
 import axios from "axios";
-<<<<<<< HEAD
-import { useDispatch, useSelector } from "react-redux";
-=======
 import { useDispatch } from "react-redux";
->>>>>>> bd8d7c205ae7cb91f2be8faeeb8a9eead6a9e29f
 import { setProducts } from "../redux/action/action";
 
 
 const ProductListing = () => {
-<<<<<<< HEAD
-  const products = useSelector((state) => state);
-=======
   // const products = useSelector((state) => state);
 
->>>>>>> bd8d7c205ae7cb91f2be8faeeb8a9eead6a9e29f
   const dispatch = useDispatch();
 
   const fetchProducts = async () => {

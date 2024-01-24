@@ -2,25 +2,19 @@ import {
   REMOVE_SELECTED_PRODUCTS,
   SELECTED_PRODUCTS,
   SET_PRODUCTS,
-<<<<<<< HEAD
-=======
   USER_ACCOUNT,
->>>>>>> bd8d7c205ae7cb91f2be8faeeb8a9eead6a9e29f
 } from "../constant";
 
 const initialState = {
   products: [],
 };
 
-<<<<<<< HEAD
-=======
 const initialUser = {
   email: "",
   password: "",
   rePassword: "",
 };
 
->>>>>>> bd8d7c205ae7cb91f2be8faeeb8a9eead6a9e29f
 export const productReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case SET_PRODUCTS:
@@ -40,8 +34,6 @@ export const selectedProductReducer = (state = {}, { type, payload }) => {
       return state;
   }
 };
-<<<<<<< HEAD
-=======
 
 export const createUser = (state = initialUser, { type, payload }) => {
   switch (type) {
@@ -54,4 +46,3 @@ export const createUser = (state = initialUser, { type, payload }) => {
       return state;
   }
 };
->>>>>>> bd8d7c205ae7cb91f2be8faeeb8a9eead6a9e29f

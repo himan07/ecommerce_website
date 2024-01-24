@@ -9,7 +9,10 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     maxWidth: "100% !important",
+    background: "#f4f4f4",
     width: "100%",
+    height: (window.innerHeight-150),
+
   },
   loginBox: {
     backgroundColor: "#fff",
@@ -18,7 +21,6 @@ const styles = {
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
     width: "500px",
     textAlign: "center",
-    margin: "150px 20px",
   },
   heading: {
     fontSize: "24px",

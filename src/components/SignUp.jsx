@@ -15,6 +15,7 @@ const styles = {
     alignItems: "center",
     maxWidth: "100% !important",
     width: "100%",
+    height: (window.innerHeight-150),
   },
   loginBox: {
     backgroundColor: "#fff",
@@ -23,7 +24,6 @@ const styles = {
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
     width: "500px",
     textAlign: "center",
-    margin: "150px 20px",
   },
   heading: {
     fontSize: "24px",
@@ -63,7 +63,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const userDetails = useSelector(state => state.user);
+  const userDetails = useSelector((state) => state.user);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
