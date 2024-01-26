@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   AppBar,
   Box,
   Button,
-  Dialog,
-  DialogContent,
   Toolbar,
   Typography,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
   const navigae = useNavigate();
+  const { loginWithRedirect } = useAuth0();
+
   const loginUser = () => {
     navigae("/user/login");
+    loginWithRedirect();
   };
+
   return (
     <div className="navbar">
       <Box sx={{ flexGrow: 1 }}>
