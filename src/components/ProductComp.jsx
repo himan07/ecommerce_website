@@ -26,7 +26,7 @@ const ProductComp = () => {
             <Card
               sx={{ maxWidth: 345, maxHeight: 400 }}
               style={{
-                padding: "20px 20px 30px 20px",
+                padding: "20px 20px 30px 30px",
                 height: 340,
                 width: 250,
               }}
@@ -47,7 +47,6 @@ const ProductComp = () => {
                 <Typography
                   variant="body2"
                   color="text.secondary"
-                  style={{ fontSize: "10px" }}
                 >
                   {title}
                 </Typography>
