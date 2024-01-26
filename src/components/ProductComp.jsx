@@ -25,16 +25,29 @@ const ProductComp = () => {
           <Link to={`/product/${id}`}>
             <Card
               sx={{ maxWidth: 345, maxHeight: 400 }}
-              style={{ padding: "20px 20px 30px 20px", height: 340 }}
+              style={{
+                padding: "20px 20px 30px 30px",
+                height: 340,
+                width: 250,
+              }}
             >
               <CardMedia
                 component="img"
-                height="194"
-                src={images}
+                height="150"
+                src={
+                  typeof images === "string" &&
+                  images.startsWith('["') &&
+                  images.endsWith('"]')
+                    ? images.slice(2, -2)
+                    : images
+                }
                 alt={title}
               />
               <CardContent>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                >
                   {title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
