@@ -8,14 +8,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
   const navigae = useNavigate();
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
   const [login, setLogin] = useState(false);
 
   const loginUser = () => {
-    navigae("/user/login");
     loginWithRedirect();
     setLogin(true);
   };
+  console.log("userDetails", user);
 
   return (
     <div className="navbar">
@@ -24,6 +24,23 @@ const Navbar = () => {
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Ecommerece App
+            </Typography>
+            <Typography>
+              {isAuthenticated ? (
+                <img
+                  src={user?.picture}
+                  alt={user?.name}
+                  style={{
+                    borderRadius: "50%",
+                    marginTop: "5px",
+                    marginRight: "10px",
+                  }}
+                  height="50"
+                  width="50"
+                />
+              ) : (
+                ""
+              )}
             </Typography>
             {isAuthenticated ? (
               <Button

@@ -52,7 +52,7 @@ const ProductDetail = () => {
       />
       <div
         className="ui grid container"
-        style={{ height: window.innerHeight - 200, marginTop: "20px" }}
+        style={{ height: window.innerHeight - 200, marginTop: "10px" }}
       >
         {Object.keys(selectedProductData).length === 0 ? (
           <div>....loading</div>

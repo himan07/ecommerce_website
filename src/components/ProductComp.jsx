@@ -1,84 +1,97 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Card, CardContent, CardMedia } from "@mui/material";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ProductComp = () => {
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { productId } = useParams();
   const Products = useSelector((state) => state.allProducts.products);
+
+  const [favStatus, setFavStatus] = useState(
+    Products.reduce((acc, product) => {
+      acc[product.id] = false;
+      return acc;
+    }, {})
+  );
+
   const renderList = Products.map((product) => {
     const { id, price, title, images, name } = product;
 
-    const handleClick = (event) => {
-      event.preventDefault();
+    const handleAddToFav = (e) => {
+      e.preventDefault();
+      setFavStatus((prev) => ({ ...prev, [id]: true }));
+
+      if (isAuthenticated) {
+      } else {
+        loginWithRedirect();
+      }
+    };
+
+    const handleRemoveFav = (e) => {
+      e.preventDefault();
+      setFavStatus((prev) => ({ ...prev, [id]: false }));
     };
 
     return (
-      <>
-        <div
-          className="product"
-          key={id}
-          style={{
-            marginTop: "20px",
-          }}
-        >
-          <Link to={`/product/${id}`}>
-            <Card
-              sx={{ maxWidth: 345, maxHeight: 400 }}
-              style={{
-                padding: "20px 20px 30px 30px",
-                height: 340,
-                width: 250,
-              }}
-            >
-              <CardMedia
-                component="img"
-                height="150"
-                src={
-                  typeof images === "string" &&
-                  images.startsWith('["') &&
-                  images.endsWith('"]')
-                    ? images.slice(2, -2)
-                    : images
-                }
-                alt={title}
+      <div
+        className="product"
+        key={id}
+        style={{
+          margin: "20px 0px 20px 10px",
+        }}
+      >
+        <Link to={`/product/${id}`}>
+          <Card
+            sx={{ maxWidth: 345, maxHeight: 400 }}
+            style={{
+              padding: "20px 20px 30px 20px",
+              height: 340,
+              width: 250,
+            }}
+          >
+            {isAuthenticated && favStatus[id] ? (
+              <FavoriteIcon
+                style={{ color: "red", float: "right", margin: "10px 0px" }}
+                onClick={(e) => handleRemoveFav(e)}
               />
-              <CardContent>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                >
-                  {title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  ${price}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {name}
-                </Typography>
-                <div
-                  className="ui vertical animated button"
-                  tabIndex="0"
-                  style={{
-                    backgroundColor: "#000000",
-                    height: "20px !importants",
-                    margin: "20px 10px",
-                    width: "150px",
-                  }}
-                  onClick={(event) => handleClick(event)}
-                >
-                  <div className="hidden content">
-                    <i className="shop icon" style={{ color: "#ddd" }}></i>
-                  </div>
-                  <div className="visible content" style={{ color: "#ddd" }}>
-                    Add to Cart
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-        </div>
-      </>
+            ) : (
+              <FavoriteBorderIcon
+                style={{ float: "right", margin: "10px 0px" }}
+                onClick={(e) => handleAddToFav(e)}
+              />
+            )}
+
+            <CardMedia
+              component="img"
+              height="200"
+              src={
+                typeof images === "string" &&
+                images.startsWith('["') &&
+                images.endsWith('"]')
+                  ? images.slice(2, -2)
+                  : images
+              }
+              alt={title}
+            />
+            <CardContent>
+              <Typography variant="body2" color="text.secondary">
+                {title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                ${price}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {name}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Link>
+      </div>
     );
   });
 
