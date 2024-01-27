@@ -1,4 +1,6 @@
 import {
+  ADD_TO_FAV,
+  ADD_TO_WISHLISHT,
   REMOVE_SELECTED_PRODUCTS,
   SELECTED_PRODUCTS,
   SET_PRODUCTS,
@@ -14,6 +16,11 @@ const initialUser = {
   password: "",
   rePassword: "",
 };
+
+const initialStateOfFavItems = {
+  favItems: [],
+};
+
 
 export const productReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -46,3 +53,20 @@ export const createUser = (state = initialUser, { type, payload }) => {
       return state;
   }
 };
+
+export const addToFavItems = (
+  state = initialStateOfFavItems,
+  { type, payload }
+) => {
+  switch (type) {
+    case ADD_TO_WISHLISHT:
+      return {
+        ...state,
+        favItems: [...state.favItems, payload],
+      };
+    default:
+      return state;
+  }
+};
+
+

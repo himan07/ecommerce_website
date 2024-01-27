@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Card, CardContent, CardMedia } from "@mui/material";
-import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useAuth0 } from "@auth0/auth0-react";
+import { addToFav } from "../redux/action/action";
 
 const ProductComp = () => {
+  const dispatch = useDispatch();
+  const favItemsWishlist = useSelector((state) => state.favItems.favItems);
+
   const { loginWithRedirect, isAuthenticated } = useAuth0();
-  const { productId } = useParams();
   const Products = useSelector((state) => state.allProducts.products);
 
   const [favStatus, setFavStatus] = useState(
@@ -21,15 +24,22 @@ const ProductComp = () => {
 
   const renderList = Products.map((product) => {
     const { id, price, title, images, name } = product;
-
-    const handleAddToFav = (e) => {
+    const handleAddToFav = (e, Products) => {
+      const adjustedIndex = id - 4;
       e.preventDefault();
       setFavStatus((prev) => ({ ...prev, [id]: true }));
-
       if (isAuthenticated) {
       } else {
         loginWithRedirect();
       }
+      dispatch(
+        addToFav({
+          images: Products[adjustedIndex].images,
+          description: Products[adjustedIndex].description,
+          price: Products[adjustedIndex].price,
+        })
+      );
+      localStorage.setItem("length", favItemsWishlist.length + 1);
     };
 
     const handleRemoveFav = (e) => {
@@ -62,22 +72,11 @@ const ProductComp = () => {
             ) : (
               <FavoriteBorderIcon
                 style={{ float: "right", margin: "10px 0px" }}
-                onClick={(e) => handleAddToFav(e)}
+                onClick={(e) => handleAddToFav(e, Products)}
               />
             )}
 
-            <CardMedia
-              component="img"
-              height="200"
-              src={
-                typeof images === "string" &&
-                images.startsWith('["') &&
-                images.endsWith('"]')
-                  ? images.slice(2, -2)
-                  : images
-              }
-              alt={title}
-            />
+            <CardMedia component="img" height="200" src={images} alt={title} />
             <CardContent>
               <Typography variant="body2" color="text.secondary">
                 {title}

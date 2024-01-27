@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectedProduct, removeProducts } from "../redux/action/action";
 import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate } from "react-router-dom";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -52,7 +52,7 @@ const ProductDetail = () => {
       />
       <div
         className="ui grid container"
-        style={{ height: window.innerHeight - 200, marginTop: "10px" }}
+        style={{ height: window.innerHeight - 300 }}
       >
         {Object.keys(selectedProductData).length === 0 ? (
           <div>....loading</div>

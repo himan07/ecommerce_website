@@ -3,6 +3,7 @@ import Navbar from "../src/components/Navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductListing from "./components/ProductListing";
 import ProductDetail from "./components/ProductDetail";
+import WishList from "./components/WishList";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<ProductListing />} />
           <Route path="/product/:productId" element={<ProductDetail />} />
+          <Route path="/products/wisthlist" element={<WishList />} />
         </Routes>
       </Router>
     </div>

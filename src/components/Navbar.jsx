@@ -5,9 +5,12 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useAuth0 } from "@auth0/auth0-react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+  const navigate = useNavigate();
+  let totalItems = localStorage.getItem("length");
   const [login, setLogin] = useState(false);
 
   const loginUser = () => {
@@ -66,8 +69,9 @@ const Navbar = () => {
             </Button>
             <Button
               color="inherit"
-              endIcon={<FavoriteIcon />}
+              endIcon={<FavoriteIcon style={{ color: "red" }} />}
               style={{ textTransform: "capitalize", marginRight: "10px" }}
+              onClick={() => navigate("/products/wisthlist")}
             >
               Wishlist
             </Button>
