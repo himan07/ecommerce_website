@@ -45,7 +45,7 @@ const Navbar = () => {
               )}
             </Typography>
 
-            <Button
+            {/* <Button
               color="inherit"
               startIcon={<ShoppingCartIcon />}
               style={{ textTransform: "capitalize", marginRight: "10px" }}
@@ -66,7 +66,7 @@ const Navbar = () => {
               >
                 0
               </span>
-            </Button>
+            </Button> */}
             <Button
               color="inherit"
               endIcon={<FavoriteIcon style={{ color: "red" }} />}

@@ -28,10 +28,10 @@ const ProductComp = () => {
       const adjustedIndex = id - 4;
       e.preventDefault();
       setFavStatus((prev) => ({ ...prev, [id]: true }));
-      if (isAuthenticated) {
-      } else {
-        loginWithRedirect();
-      }
+      // if (isAuthenticated) {
+      // } else {
+      //   loginWithRedirect();
+      // }
       dispatch(
         addToFav({
           images: Products[adjustedIndex].images,
@@ -64,7 +64,7 @@ const ProductComp = () => {
               width: 250,
             }}
           >
-            {isAuthenticated && favStatus[id] ? (
+            {favStatus[id] ? (
               <FavoriteIcon
                 style={{ color: "red", float: "right", margin: "10px 0px" }}
                 onClick={(e) => handleRemoveFav(e)}
