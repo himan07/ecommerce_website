@@ -4,6 +4,7 @@ import {
   REMOVE_SELECTED_PRODUCTS,
   USER_ACCOUNT,
   ADD_TO_WISHLISHT,
+  ADD_TO_CART,
 } from "../constant";
 
 export const setProducts = (products) => {
@@ -36,6 +37,13 @@ export const createUserAccount = (userDetails) => {
 export const addToFav = (products) => {
   return {
     type: ADD_TO_WISHLISHT,
+    payload: products,
+  };
+};
+
+export const addToCart = (products) => {
+  return {
+    type: ADD_TO_CART,
     payload: products,
   };
 };

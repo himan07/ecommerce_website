@@ -25,20 +25,21 @@ const ProductComp = () => {
   const renderList = Products.map((product) => {
     const { id, price, title, images, name } = product;
     const handleAddToFav = (e, Products) => {
-      const adjustedIndex = id - 4;
+      const adjustedIndex = id - 7;
       e.preventDefault();
       setFavStatus((prev) => ({ ...prev, [id]: true }));
-      // if (isAuthenticated) {
-      // } else {
-      //   loginWithRedirect();
-      // }
+      if (isAuthenticated) {
+      } else {
+        loginWithRedirect();
+      }
       dispatch(
         addToFav({
-          images: Products[adjustedIndex].images,
-          description: Products[adjustedIndex].description,
-          price: Products[adjustedIndex].price,
+          images: Products[adjustedIndex]?.images,
+          description: Products[adjustedIndex]?.description,
+          price: Products[adjustedIndex]?.price,
         })
       );
+      console.log("productDetails", Products[id]);
       localStorage.setItem("length", favItemsWishlist.length + 1);
     };
 

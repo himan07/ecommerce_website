@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductListing from "./components/ProductListing";
 import ProductDetail from "./components/ProductDetail";
 import WishList from "./components/WishList";
+import Cart from "./components/Cart";
+import LoginPage from "./components/Login";
+import SignupPage from "./components/Signup";
 
 const App = () => {
   return (
@@ -14,6 +17,9 @@ const App = () => {
           <Route path="/" element={<ProductListing />} />
           <Route path="/product/:productId" element={<ProductDetail />} />
           <Route path="/products/wisthlist" element={<WishList />} />
+          <Route path="/products/cart" element={<Cart />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
         </Routes>
       </Router>
     </div>

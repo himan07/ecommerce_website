@@ -6,15 +6,19 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useAuth0 } from "@auth0/auth0-react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
-  let totalItems = localStorage.getItem("length");
+  const cartLength = useSelector((state) => state.cartItems.cartItems.length);
+  const wishlistLength = useSelector((state) => state.favItems.favItems.length);
+
   const [login, setLogin] = useState(false);
 
   const loginUser = () => {
-    loginWithRedirect();
+    navigate("/login")
+    // loginWithRedirect();
     setLogin(true);
   };
   console.log("userDetails", user);
@@ -45,33 +49,41 @@ const Navbar = () => {
               )}
             </Typography>
 
-            {/* <Button
+            <Button
               color="inherit"
               startIcon={<ShoppingCartIcon />}
               style={{ textTransform: "capitalize", marginRight: "10px" }}
+              onClick={() => navigate("/products/cart")}
+              disabled={cartLength === 0}
             >
               Cart&nbsp;&nbsp;
               <span
                 style={{
-                  border: "1px solid white",
+                  border:
+                    cartLength === 0 ? "1px solid #595959" : "1px solid white",
                   borderRadius: "50%",
                   height: 20,
                   width: 22,
                   backgroundColor: "white",
-                  color: "red",
+                  color: cartLength === 0 ? "black" : "red",
                   fontWeight: "bolder",
                   fontSize: "12px",
                   paddingBottom: "20px",
                 }}
               >
-                0
+                {cartLength}
               </span>
-            </Button> */}
+            </Button>
             <Button
               color="inherit"
-              endIcon={<FavoriteIcon style={{ color: "red" }} />}
+              endIcon={
+                <FavoriteIcon
+                  style={{ color: wishlistLength === 0 ? "gray" : "red" }}
+                />
+              }
               style={{ textTransform: "capitalize", marginRight: "10px" }}
               onClick={() => navigate("/products/wisthlist")}
+              disabled={wishlistLength === 0}
             >
               Wishlist
             </Button>

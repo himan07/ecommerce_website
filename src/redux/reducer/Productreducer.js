@@ -1,4 +1,5 @@
 import {
+  ADD_TO_CART,
   ADD_TO_FAV,
   ADD_TO_WISHLISHT,
   REMOVE_SELECTED_PRODUCTS,
@@ -21,6 +22,9 @@ const initialStateOfFavItems = {
   favItems: [],
 };
 
+const initialCart = {
+  cartItems: [],
+};
 
 export const productReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -69,4 +73,14 @@ export const addToFavItems = (
   }
 };
 
-
+export const addToCart = (state = initialCart, { type, payload }) => {
+  switch (type) {
+    case ADD_TO_CART:
+      return {
+        ...state,
+        cartItems: [...state.cartItems, payload],
+      };
+    default:
+      return state;
+  }
+};

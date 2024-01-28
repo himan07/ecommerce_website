@@ -5,14 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectedProduct, removeProducts } from "../redux/action/action";
 import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate } from "react-router-dom";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { addToCart } from "../redux/action/action";
 
 const ProductDetail = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // console.log(productId);
 
   const selectedProductData = useSelector((state) => state.product);
   const { price, title, description, images } = selectedProductData;
@@ -37,6 +35,18 @@ const ProductDetail = () => {
 
   const handleClick = () => {
     navigate("/");
+  };
+
+  const addToCartItems = (e, selectedProductData) => {
+    e.preventDefault();
+    dispatch(
+      addToCart({
+        title: selectedProductData.title,
+        price: selectedProductData.price,
+        images: selectedProductData.images,
+        description: selectedProductData.description,
+      })
+    );
   };
 
   return (
@@ -80,6 +90,7 @@ const ProductDetail = () => {
                     className="ui vertical animated button"
                     tabIndex="0"
                     style={{ backgroundColor: "#000000" }}
+                    onClick={(e) => addToCartItems(e, selectedProductData)}
                   >
                     <div className="hidden content">
                       <i className="shop icon" style={{ color: "#ddd" }}></i>
